@@ -8,7 +8,7 @@ from model.Constantes import *
 # définit un segment de bateau :
 # Un segment de bateau est un dictionnaire contenant les couples (clé, valeur) suivants :
 #   - const.SEGMENT_COORDONNEES : Les coordonnées du segment sur la grille
-#   - ccnst.SEGMENT_ETAT : L'état du segment (const.RATE ou const.TOUCHE)
+#   - const.SEGMENT_ETAT : L'état du segment (const.INTACT ou const.TOUCHE)
 #
 
 
