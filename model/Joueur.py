@@ -41,6 +41,19 @@ def getBateauxJoueur(joueur: dict) -> int:
 
     return joueur[const.JOUEUR_LISTE_BATEAUX]
 
+def getGrilleTirsJoueur(joueur: dict) -> int:
+    if not type_joueur(joueur):
+        raise ValueError("getGrilleTirsJoueur : Structure invalide, n'est pas un joueur")
+
+    return joueur[const.JOUEUR_GRILLE_TIRS]
+
+
+def getGrilleTirsAdversaire(joueur: dict) -> int:
+    if not type_joueur(joueur):
+        raise ValueError("getGrilleTirsAdversaire : Structure invalide, n'est pas un joueur")
+
+    return joueur[const.JOUEUR_GRILLE_ADVERSAIRE]
+
 def type_joueur(joueur: dict) -> bool:
     """
     Retourne <code>True</code> si la liste semble correspondre à un joueur,
