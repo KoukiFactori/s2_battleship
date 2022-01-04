@@ -24,7 +24,12 @@ def construireBateau(name: str) -> dict:
 
     return bateau
 
+def getNomBateau(bateau: dict) -> str:
 
+    if not type_bateau(bateau):
+        raise ValueError(f"getNomBateau : L'argument {bateau} n'est pas un bateau valide")
+
+    return bateau[const.BATEAU_NOM]
 
 def type_bateau(bateau: dict) -> bool:
     """
