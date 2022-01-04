@@ -25,13 +25,9 @@ def sontVoisins(first_pos: tuple, other_pos: tuple) -> bool:
     if not type_coordonnees(other_pos) or other_pos is None:
         raise ValueError(f"sontVoisins : La coordonnée {other_pos} n'est pas valide")
 
-    v_diff = abs(first_pos[0] - other_pos[0])
-    h_diff = abs(first_pos[1] - other_pos[1])
-
-    if v_diff == 0 and h_diff == 0:
-        return False
-
-    return all(list(map(lambda x: 0 <= x < 2, [v_diff, h_diff])))
+    v_diff = (first_pos[0] - other_pos[0])
+    h_diff = (first_pos[1] - other_pos[1])
+    return 0 < v_diff**2 + h_diff**2 <= 2
 
 def type_coordonnees(c: tuple) -> bool:
     """

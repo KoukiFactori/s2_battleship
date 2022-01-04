@@ -69,7 +69,7 @@ def setSegmentBateau(bateau: dict, n, segment: dict) -> None:
         raise ValueError(f"setSegmentBateau : L'argument {bateau} n'est pas un bateau valide")
     if not type_segment(segment):
         raise ValueError(f"setSegmentBateau : L'argument {segment} n'est pas un segment valide")
-    if not (0 <= n < len(bateau[const.BATEAU_SEGMENTS])):
+    if not 0 <= n < getTailleBateau(bateau):
             raise ValueError(f"setSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     bateau[const.BATEAU_SEGMENTS][n] = segment
