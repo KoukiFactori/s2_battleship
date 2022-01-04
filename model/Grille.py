@@ -11,6 +11,17 @@ from model.Case import type_case
 # et chaque bateau contiendra sa liste de coordonnées.
 #
 
+def construireGrille() -> list:
+    grille = []
+
+    for rowI in range(const.DIM):
+        row = []
+        for colI in range(const.DIM):
+            row.append(None)
+        grille.append(row)
+    
+    return grille
+
 
 def type_grille(g: list) -> bool:
     """
