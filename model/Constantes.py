@@ -8,11 +8,12 @@ import const
 #
 # Définition des résultats du tir
 #
-const.RATE = "Dans l'eau"
-const.INTACT = "Intact"
-const.TOUCHE = "Touché"
-const.COULE = "Coulé"
-const.FOND = "Fond"
+const.RATE = "Dans l'eau" #Tir manqué
+const.INTACT = "Intact" #Pas de dégats
+const.TOUCHE = "Touché" #Tir réussi
+const.COULE = "Coulé" #Bateau coulé
+
+const.FOND = "Fond" #Fond du plateau - pas de bateau
 
 #
 # Dimension de la grille de la bataille navale
