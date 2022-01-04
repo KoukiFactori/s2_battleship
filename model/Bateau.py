@@ -31,6 +31,14 @@ def getNomBateau(bateau: dict) -> str:
 
     return bateau[const.BATEAU_NOM]
 
+def getTailleBateau(bateau: dict) -> str:
+
+    if not type_bateau(bateau):
+        raise ValueError(f"getTailleBateau : L'argument {bateau} n'est pas un bateau valide")
+
+    return len(bateau[const.BATEAU_SEGMENTS])
+
+
 def type_bateau(bateau: dict) -> bool:
     """
     Détermine si la liste représente un bateau
