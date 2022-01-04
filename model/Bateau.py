@@ -9,7 +9,7 @@
 #
 
 from model.Coordonnees import type_coordonnees
-from model.Segment import type_segment, construireSegment
+from model.Segment import type_segment, construireSegment, getCoordonneesSegment
 from model.Constantes import *
 
 def construireBateau(name: str) -> dict:
@@ -90,6 +90,12 @@ def peutPlacerBateau(bateau: dict, first_case: tuple, rot_h: bool) -> bool:
     last_pos = (first_case[0], first_case[1] + (ship_size - 1)) if rot_h else (first_case[0] + (ship_size - 1), first_case[1])
 
     return type_coordonnees(last_pos)
+
+def estPlaceBateau(bateau: dict) -> bool:
+    if not type_bateau(bateau):
+        raise ValueError(f"estPlaceBateau : L'argument {bateau} n'est pas un bateau valide")
+
+    return all([*map(getCoordonneesSegment, getSegmentsBateau(bateau))])
 
 def type_bateau(bateau: dict) -> bool:
     """
