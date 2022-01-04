@@ -50,7 +50,7 @@ def getSegmentBateau(bateau: dict, n) -> dict:
         raise ValueError(f"getSegmentBateau : L'argument {bateau} n'est pas un bateau valide")
 
     if type(n) == int:
-        if not (0 <= n < len(bateau[const.BATEAU_SEGMENTS])):
+        if not (0 <= n < getTailleBateau(bateau)):
             raise ValueError(f"getSegmentBateau (index): Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     elif type(n) == tuple:
