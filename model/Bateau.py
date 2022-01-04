@@ -8,8 +8,21 @@
 #   La taille du bateau n'est pas stockée car elle correspond à la taille de la liste des listes [coordonnées, état]
 #
 
-from model.Segment import type_segment
+from model.Segment import type_segment, construireSegment
 from model.Constantes import *
+
+def construireBateau(name: str) -> dict:
+    if name not in const.BATEAUX_CASES.keys():
+        raise ValueError("Nom de bateau invalide")
+    
+    seg_nb = const.BATEAUX_CASES[name]
+
+    bateau = {
+        const.BATEAU_NOM: name,
+        const.BATEAU_SEGMENTS: [construireSegment() for segment in range(seg_nb)]
+    }
+
+    return bateau
 
 
 
