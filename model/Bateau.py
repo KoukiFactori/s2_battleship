@@ -8,6 +8,7 @@
 #   La taille du bateau n'est pas stockée car elle correspond à la taille de la liste des listes [coordonnées, état]
 #
 
+from model.Coordonnees import type_coordonnees
 from model.Segment import type_segment, construireSegment
 from model.Constantes import *
 
@@ -69,15 +70,26 @@ def setSegmentBateau(bateau: dict, n, segment: dict) -> None:
     if not type_segment(segment):
         raise ValueError(f"setSegmentBateau : L'argument {segment} n'est pas un segment valide")
     if not (0 <= n < len(bateau[const.BATEAU_SEGMENTS])):
-            raise ValueError(f"getSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
+            raise ValueError(f"setSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     bateau[const.BATEAU_SEGMENTS][n] = segment
 
 def getCoordonneesBateau(bateau: dict) -> list:
     if not type_bateau(bateau):
-        raise ValueError(f"getCoordonneesSegment : L'argument {bateau} n'est pas un bateau valide")
+        raise ValueError(f"getCoordonneesBateau : L'argument {bateau} n'est pas un bateau valide")
 
     return list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
+
+def peutPlacerBateau(bateau: dict, first_case: tuple, rot_h: bool) -> bool:
+    if not type_bateau(bateau):
+        raise ValueError(f"peutPlacerBateau : L'argument {bateau} n'est pas un bateau valide")
+    if not type_coordonnees(first_case) or first_case is None:
+        raise ValueError(f"peutPlacerBateau : L'argument {first_case} n'est pas une coordonnée valide")
+
+    ship_size = getTailleBateau(bateau)
+    last_pos = (first_case[0], first_case[1] + (ship_size - 1)) if rot_h else (first_case[0] + (ship_size - 1), first_case[1])
+
+    return type_coordonnees(last_pos)
 
 def type_bateau(bateau: dict) -> bool:
     """
