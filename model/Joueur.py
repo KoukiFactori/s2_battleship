@@ -1,7 +1,7 @@
 # Joueur.py
 
-from model.Bateau import type_bateau
-from model.Grille import type_grille
+from model.Bateau import type_bateau, construireBateau
+from model.Grille import type_grille, construireGrille
 from model.Constantes import *
 
 #
@@ -13,6 +13,15 @@ from model.Constantes import *
 #  de l'adversaire.
 #
 
+def construireJoueur(name: str, shipsName: [str]) -> dict:
+    joueur = {
+        const.JOUEUR_NOM: name,
+        const.JOUEUR_LISTE_BATEAUX:  [construireBateau(ship) for ship in shipsName],
+        const.JOUEUR_GRILLE_TIRS: construireGrille(),
+        const.JOUEUR_GRILLE_ADVERSAIRE: construireGrille()
+    }
+
+    return joueur
 
 def type_joueur(joueur: dict) -> bool:
     """
