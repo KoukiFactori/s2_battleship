@@ -185,7 +185,7 @@ class TestBateauMethods(unittest.TestCase):
         self.assertRaises(ValueError, estPlaceBateau, "N'importe quoi")
 
     @unittest.skipIf('construireBateau' not in globals() or 'sontVoisinsBateau' not in globals(),
-                    "La focntion sontVoisinsBateau n'est pas écrite")
+                    "La fonction sontVoisinsBateau n'est pas écrite")
     def test_sontVoisinsBateau(self):
         # On teste avec toutes les combinaisons possibles de bateaux
         for nom1 in const.BATEAUX_CASES:

@@ -23,6 +23,13 @@ def construireJoueur(name: str, shipsName: [str]) -> dict:
 
     return joueur
 
+def getNomJoueur(joueur: dict) -> str:
+    if not type_joueur(joueur):
+        raise ValueError("getNomJoueur : Structure invalide, n'est pas un joueur")
+
+    return joueur[const.JOUEUR_NOM]
+
+
 def type_joueur(joueur: dict) -> bool:
     """
     Retourne <code>True</code> si la liste semble correspondre à un joueur,
