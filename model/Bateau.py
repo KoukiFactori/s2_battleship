@@ -38,6 +38,40 @@ def getTailleBateau(bateau: dict) -> str:
 
     return len(bateau[const.BATEAU_SEGMENTS])
 
+def getSegmentsBateau(bateau: dict) -> list:
+    if not type_bateau(bateau):
+        raise ValueError(f"getSegmentsBateau : L'argument {bateau} n'est pas un bateau valide")
+
+    return bateau[const.BATEAU_SEGMENTS]
+
+def getSegmentBateau(bateau: dict, n) -> dict:
+    if not type_bateau(bateau):
+        raise ValueError(f"getSegmentBateau : L'argument {bateau} n'est pas un bateau valide")
+
+    if type(n) == int:
+        if not (0 <= n < len(bateau[const.BATEAU_SEGMENTS])):
+            raise ValueError(f"getSegmentBateau (index): Impossible d'accéder à ce segment, la valeur est en dehors des limites")
+
+    elif type(n) == tuple:
+        #Renvoie les positions de chaque segment du bateau
+        segment_positions = list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
+        
+        if n not in segment_positions:
+            raise ValueError(f"getSegmentBateau (coordonnées): Impossible d'accéder à ce segment, ce segment n'existe pas sur ce bateau")
+    else:
+        raise ValueError(f"Le type du second paramètre {type(n)} ne correspond pas...") 
+
+    return bateau[const.BATEAU_SEGMENTS][n if type(n) == int else segment_positions.index(n)]
+
+def setSegmentBateau(bateau: dict, n, segment: dict):
+    if not type_bateau(bateau):
+        raise ValueError(f"setSegmentBateau : L'argument {bateau} n'est pas un bateau valide")
+    if not type_segment(segment):
+        raise ValueError(f"setSegmentBateau : L'argument {segment} n'est pas un segment valide")
+    if not (0 <= n < len(bateau[const.BATEAU_SEGMENTS])):
+            raise ValueError(f"getSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
+
+    bateau[const.BATEAU_SEGMENTS][n] = segment
 
 def type_bateau(bateau: dict) -> bool:
     """
