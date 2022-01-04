@@ -29,6 +29,13 @@ def getNomJoueur(joueur: dict) -> str:
 
     return joueur[const.JOUEUR_NOM]
 
+def getNombreBateauxJoueur(joueur: dict) -> int:
+    if not type_joueur(joueur):
+        raise ValueError("getNomJoueur : Structure invalide, n'est pas un joueur")
+
+    return len(joueur[const.JOUEUR_LISTE_BATEAUX])
+
+
 
 def type_joueur(joueur: dict) -> bool:
     """
