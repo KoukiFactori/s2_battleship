@@ -53,7 +53,7 @@ def getSegmentBateau(bateau: dict, n) -> dict:
             raise ValueError(f"getSegmentBateau (index): Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     elif type(n) == tuple:
-        #Renvoie les positions de chaque segment du bateau
+        #Renvoie la position de chaque segment du bateau
         segment_positions = list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
         
         if n not in segment_positions:
@@ -63,7 +63,7 @@ def getSegmentBateau(bateau: dict, n) -> dict:
 
     return bateau[const.BATEAU_SEGMENTS][n if type(n) == int else segment_positions.index(n)]
 
-def setSegmentBateau(bateau: dict, n, segment: dict):
+def setSegmentBateau(bateau: dict, n, segment: dict) -> None:
     if not type_bateau(bateau):
         raise ValueError(f"setSegmentBateau : L'argument {bateau} n'est pas un bateau valide")
     if not type_segment(segment):
@@ -72,6 +72,12 @@ def setSegmentBateau(bateau: dict, n, segment: dict):
             raise ValueError(f"getSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     bateau[const.BATEAU_SEGMENTS][n] = segment
+
+def getCoordonneesBateau(bateau: dict) -> list:
+    if not type_bateau(bateau):
+        raise ValueError(f"getCoordonneesSegment : L'argument {bateau} n'est pas un bateau valide")
+
+    return list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
 
 def type_bateau(bateau: dict) -> bool:
     """
