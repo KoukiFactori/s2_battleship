@@ -131,6 +131,18 @@ def placerBateau(bateau: dict, first_case: tuple, is_horizontal: bool) -> None:
         else:
             setCoordonneesSegment(segment, (first_case[0] + x, first_case[1]))
 
+def reinitialiserBateau(ship: dict) -> None:
+    if not type_bateau(ship):
+        raise ValueError(f"reinitialiserBateau : Le bateau {ship} n'est pas valide")
+
+    #Cette fonction remet à None les coordonnées des segments du bateau et à const.INTACT l’état des segments.
+    segments = getSegmentsBateau(ship)
+    for segment in segments:
+        segment[const.SEGMENT_COORDONNEES] = None
+        segment[const.SEGMENT_ETAT] = const.INTACT
+        
+    return None
+
 def type_bateau(bateau: dict) -> bool:
     """
     Détermine si la liste représente un bateau
