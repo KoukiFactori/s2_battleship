@@ -1,9 +1,7 @@
 # Joueur.py
 
 from model.Coordonnees import type_coordonnees
-from model.Bateau import type_bateau, construireBateau, \
-                        estPlaceBateau, getNomBateau, \
-                        peutPlacerBateau, placerBateau, sontVoisinsBateau
+from model.Bateau import *
 
 from model.Grille import type_grille, construireGrille
 from model.Constantes import *
@@ -83,7 +81,14 @@ def placerBateauJoueur(joueur: dict, ship: dict, first_case: tuple, horizontal: 
 
     return False
 
+def reinitialiserBateauxJoueur(joueur: dict) -> None:
+    if not type_joueur(joueur):
+        raise ValueError(f"reinitialiserBateauxJoueur : Le joueur {joueur} n'a pas une structure valide")
 
+    for ship in getBateauxJoueur(joueur):
+        reinitialiserBateau(ship)
+
+    return None
 
 def type_joueur(joueur: dict) -> bool:
     """

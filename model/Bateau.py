@@ -9,7 +9,7 @@
 #
 
 from model.Coordonnees import type_coordonnees, sontVoisins
-from model.Segment import type_segment, construireSegment, getCoordonneesSegment, setCoordonneesSegment
+from model.Segment import type_segment, construireSegment, getCoordonneesSegment, setCoordonneesSegment, setEtatSegment
 from model.Constantes import *
 
 def construireBateau(name: str) -> dict:
@@ -138,8 +138,8 @@ def reinitialiserBateau(ship: dict) -> None:
     #Cette fonction remet à None les coordonnées des segments du bateau et à const.INTACT l’état des segments.
     segments = getSegmentsBateau(ship)
     for segment in segments:
-        segment[const.SEGMENT_COORDONNEES] = None
-        segment[const.SEGMENT_ETAT] = const.INTACT
+        setCoordonneesSegment(segment, None)
+        setEtatSegment(segment, const.INTACT)
         
     return None
 
