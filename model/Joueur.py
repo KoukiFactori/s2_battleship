@@ -64,7 +64,7 @@ def placerBateauJoueur(joueur: dict, ship: dict, first_case: tuple, horizontal: 
     if not type_coordonnees(first_case):
         raise ValueError(f"placerBateauJoueur : La première coordonnée {first_case} n'est pas valide.")
 
-    if getNomBateau(ship) not in [*map(getNomBateau, getBateauxJoueur(joueur))]:
+    if ship not in getBateauxJoueur(joueur):
         raise RuntimeError(f"placerBateauJoueur : {ship} ne vous appartient pas !")
 
     dummy_ship = construireBateau(getNomBateau(ship))

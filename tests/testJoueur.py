@@ -106,7 +106,7 @@ class TestJoueurMethods(unittest.TestCase):
         self.assertRaises(ValueError, placerBateauJoueur, j, "N'importe quoi", (0, 0), True)
         self.assertRaises(ValueError, placerBateauJoueur, j, lst_bateaux[idx_t], "N'importe quoi", True)
         # Test du bateau n'appartenant pas au joueur
-        self.assertRaises(RuntimeError, placerBateauJoueur, j, construireBateau(const.SOUS_MARIN), (0, 0), True)
+        self.assertRaises(RuntimeError, placerBateauJoueur, j, construireBateau(const.TORPILLEUR), (0, 0), True)
 
     @unittest.skipIf("reinitialiserBateauxJoueur" not in globals(),
                      "La fonction reinitialiserBateauxJoueur n'est pas écrite")
