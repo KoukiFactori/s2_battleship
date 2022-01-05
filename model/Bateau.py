@@ -163,6 +163,12 @@ def setEtatSegmentBateau(bateau: dict, coords: tuple, etat: str) -> None:
     setEtatSegment(getSegmentBateau(bateau, coords), etat)
     return None
 
+
+def estCouleBateau(bateau: dict) -> bool:
+    if not type_bateau(bateau):
+        raise ValueError(f"estCouleBateau : Le bateau {bateau} n'est pas valide")
+    return all(map(lambda segment: getEtatSegment(segment) == const.TOUCHE, getSegmentsBateau(bateau)))
+
 def type_bateau(bateau: dict) -> bool:
     """
     Détermine si la liste représente un bateau
