@@ -1,6 +1,10 @@
 # Joueur.py
 
-from model.Bateau import type_bateau, construireBateau
+from model.Coordonnees import type_coordonnees
+from model.Bateau import type_bateau, construireBateau, \
+                        estPlaceBateau, getNomBateau, \
+                        peutPlacerBateau, placerBateau, sontVoisinsBateau
+
 from model.Grille import type_grille, construireGrille
 from model.Constantes import *
 
@@ -53,6 +57,32 @@ def getGrilleTirsAdversaire(joueur: dict) -> list:
         raise ValueError("getGrilleTirsAdversaire : Structure invalide, n'est pas un joueur")
 
     return joueur[const.JOUEUR_GRILLE_ADVERSAIRE]
+
+import random
+def placerBateauJoueur(joueur: dict, ship: dict, first_case: tuple, horizontal: bool) -> bool:
+    if not type_joueur(joueur):
+        raise ValueError(f"placerBateauJoueur : Le joueur {joueur} n'a pas une structure valide")
+    if not type_bateau(ship):
+        raise ValueError(f"placerBateauJoueur : Le bateau {ship} n'est pas valide")
+    if not type_coordonnees(first_case):
+        raise ValueError(f"placerBateauJoueur : La première coordonnée {first_case} n'est pas valide.")
+
+    if getNomBateau(ship) not in [*map(getNomBateau, getBateauxJoueur(joueur))]:
+        raise RuntimeError(f"placerBateauJoueur : {ship} ne vous appartient pas !")
+
+    dummy_ship = construireBateau(getNomBateau(ship))
+    can_place = peutPlacerBateau(dummy_ship, first_case, horizontal)
+
+    if can_place:
+        placerBateau(dummy_ship, first_case, horizontal)
+        bateau_joueur_places = [ship for ship in getBateauxJoueur(joueur) if estPlaceBateau(ship)]
+
+        is_valid = not any(map(lambda a: sontVoisinsBateau(dummy_ship, a), bateau_joueur_places))
+        if is_valid:
+            placerBateau(ship, first_case, horizontal)
+            return True
+
+    return False
 
 def type_joueur(joueur: dict) -> bool:
     """
