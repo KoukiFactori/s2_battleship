@@ -2,15 +2,10 @@
 
 
 #
-
 # - Définit les coordonnées d'une case
-
 #
-
 #  Une coordonnée est un tuple de deux entiers compris entre 0 (inclus) et const.DIM (exclus)
-
 #  Elle peut aussi être None si elle est non définie
-
 #
 
 
@@ -27,6 +22,7 @@ def sontVoisins(first_pos: tuple, other_pos: tuple) -> bool:
 
     v_diff = (first_pos[0] - other_pos[0])
     h_diff = (first_pos[1] - other_pos[1])
+
     return 0 < v_diff**2 + h_diff**2 <= 2
 
 def type_coordonnees(c: tuple) -> bool:
@@ -45,6 +41,3 @@ def type_coordonnees(c: tuple) -> bool:
     """
 
     return c is None or (type(c) == tuple and len(c) == 2 and 0 <= c[0] < const.DIM and 0 <= c[1] < const.DIM)
-
-
-

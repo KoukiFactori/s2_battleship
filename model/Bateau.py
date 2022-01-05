@@ -55,7 +55,7 @@ def getSegmentBateau(bateau: dict, n) -> dict:
 
     elif type(n) == tuple:
         #Renvoie la position de chaque segment du bateau
-        segment_positions = list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
+        segment_positions = list(map(getCoordonneesSegment, getSegmentsBateau(bateau)))
         
         if n not in segment_positions:
             raise ValueError(f"getSegmentBateau (coordonnées): Impossible d'accéder à ce segment, ce segment n'existe pas sur ce bateau")
@@ -78,7 +78,7 @@ def getCoordonneesBateau(bateau: dict) -> list:
     if not type_bateau(bateau):
         raise ValueError(f"getCoordonneesBateau : L'argument {bateau} n'est pas un bateau valide")
 
-    return list(map(lambda s: s[const.SEGMENT_COORDONNEES], bateau[const.BATEAU_SEGMENTS]))
+    return list(map(getCoordonneesSegment, getSegmentsBateau(bateau)))
 
 def peutPlacerBateau(bateau: dict, first_case: tuple, rot_h: bool) -> bool:
     if not type_bateau(bateau):
@@ -95,7 +95,7 @@ def estPlaceBateau(bateau: dict) -> bool:
     if not type_bateau(bateau):
         raise ValueError(f"estPlaceBateau : L'argument {bateau} n'est pas un bateau valide")
 
-    return all([*map(getCoordonneesSegment, getSegmentsBateau(bateau))])
+    return all([*map(getCoordonneesSegment, getSegmentsBateau(bateau))]) #True si tous les segments ont une coordonnée | Renvoie False si un None est dans la liste
 
 def sontVoisinsBateau(first_ship: dict, other_ship: dict) -> bool:
     if not type_bateau(first_ship):
