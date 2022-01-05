@@ -24,4 +24,4 @@ def choisirCaseTireManuel(joueur: dict) -> tuple:
   window.set_action("Choisissez la case de tir (bouton gauche)")
 
   res = window.get_clicked_cell(2)
-  return res
+  return res[0]

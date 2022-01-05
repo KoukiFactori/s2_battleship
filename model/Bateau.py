@@ -9,7 +9,7 @@
 #
 
 from model.Coordonnees import type_coordonnees, sontVoisins
-from model.Segment import type_segment, construireSegment, getCoordonneesSegment, setCoordonneesSegment, setEtatSegment
+from model.Segment import *
 from model.Constantes import *
 
 def construireBateau(name: str) -> dict:
@@ -151,6 +151,17 @@ def contientSegmentBateau(bateau: dict, coords: tuple) -> bool:
 
     segments_coords = [*map(getCoordonneesSegment, getSegmentsBateau(bateau))]
     return coords in segments_coords
+
+def setEtatSegmentBateau(bateau: dict, coords: tuple, etat: str) -> None:
+    if not type_etat_segment(etat):
+        raise ValueError(f"setEtatSegmentBateau : L'état {etat} n'est pas un état valide.")
+    if not type_bateau(bateau):
+        raise ValueError(f"setEtatSegmentBateau : Le bateau {bateau} n'est pas valide")
+    if not type_coordonnees(coords) or coords is None:
+        raise ValueError(f"setEtatSegmentBateau : Les coordonées {coords} ne sont pas des coordonnées valides ou valent None")
+
+    setEtatSegment(getSegmentBateau(bateau, coords), etat)
+    return None
 
 def type_bateau(bateau: dict) -> bool:
     """
