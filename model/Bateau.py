@@ -8,8 +8,8 @@
 #   La taille du bateau n'est pas stockée car elle correspond à la taille de la liste des listes [coordonnées, état]
 #
 
-from model.Coordonnees import type_coordonnees
-from model.Segment import type_segment, construireSegment, getCoordonneesSegment
+from model.Coordonnees import type_coordonnees, sontVoisins
+from model.Segment import type_segment, construireSegment, getCoordonneesSegment 
 from model.Constantes import *
 
 def construireBateau(name: str) -> dict:
@@ -96,6 +96,20 @@ def estPlaceBateau(bateau: dict) -> bool:
         raise ValueError(f"estPlaceBateau : L'argument {bateau} n'est pas un bateau valide")
 
     return all([*map(getCoordonneesSegment, getSegmentsBateau(bateau))])
+
+def sontVoisinsBateau(first_ship: dict, other_ship: dict) -> bool:
+    if not type_bateau(first_ship):
+        raise ValueError(f"estPlaceBateau : L'argument {first_ship} n'est pas un bateau valide")
+    if not type_bateau(other_ship):
+        raise ValueError(f"estPlaceBateau : L'argument {other_ship} n'est pas un bateau valide")
+    if not estPlaceBateau(first_ship):
+        raise ValueError(f"estPlaceBateau : Le bateau {first_ship} n'est pas placé")
+    if not estPlaceBateau(other_ship):
+        raise ValueError(f"estPlaceBateau : Le bateau {other_ship} n'est pas placé")
+
+    seg_coords1 = [getCoordonneesSegment(seg_first) for seg_first in getSegmentsBateau(first_ship)]
+    seg_coords2 = [getCoordonneesSegment(seg_other) for seg_other in getSegmentsBateau(other_ship)]
+    return any([sontVoisins(first_pos, other_pos) for first_pos in seg_coords1 for other_pos in seg_coords2])
 
 def type_bateau(bateau: dict) -> bool:
     """
