@@ -58,7 +58,6 @@ def getGrilleTirsAdversaire(joueur: dict) -> list:
 
     return joueur[const.JOUEUR_GRILLE_ADVERSAIRE]
 
-import random
 def placerBateauJoueur(joueur: dict, ship: dict, first_case: tuple, horizontal: bool) -> bool:
     if not type_joueur(joueur):
         raise ValueError(f"placerBateauJoueur : Le joueur {joueur} n'a pas une structure valide")
@@ -83,6 +82,8 @@ def placerBateauJoueur(joueur: dict, ship: dict, first_case: tuple, horizontal: 
             return True
 
     return False
+
+
 
 def type_joueur(joueur: dict) -> bool:
     """
