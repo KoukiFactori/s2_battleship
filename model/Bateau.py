@@ -9,7 +9,7 @@
 #
 
 from model.Coordonnees import type_coordonnees, sontVoisins
-from model.Segment import type_segment, construireSegment, getCoordonneesSegment 
+from model.Segment import type_segment, construireSegment, getCoordonneesSegment, setCoordonneesSegment
 from model.Constantes import *
 
 def construireBateau(name: str) -> dict:
@@ -99,17 +99,37 @@ def estPlaceBateau(bateau: dict) -> bool:
 
 def sontVoisinsBateau(first_ship: dict, other_ship: dict) -> bool:
     if not type_bateau(first_ship):
-        raise ValueError(f"estPlaceBateau : L'argument {first_ship} n'est pas un bateau valide")
+        raise ValueError(f"sontVoisinsBateau : L'argument {first_ship} n'est pas un bateau valide")
     if not type_bateau(other_ship):
-        raise ValueError(f"estPlaceBateau : L'argument {other_ship} n'est pas un bateau valide")
+        raise ValueError(f"sontVoisinsBateau : L'argument {other_ship} n'est pas un bateau valide")
     if not estPlaceBateau(first_ship):
-        raise ValueError(f"estPlaceBateau : Le bateau {first_ship} n'est pas placé")
+        raise ValueError(f"sontVoisinsBateau : Le bateau {first_ship} n'est pas placé")
     if not estPlaceBateau(other_ship):
-        raise ValueError(f"estPlaceBateau : Le bateau {other_ship} n'est pas placé")
+        raise ValueError(f"sontVoisinsBateau : Le bateau {other_ship} n'est pas placé")
 
     seg_coords1 = [getCoordonneesSegment(seg_first) for seg_first in getSegmentsBateau(first_ship)]
     seg_coords2 = [getCoordonneesSegment(seg_other) for seg_other in getSegmentsBateau(other_ship)]
     return any([sontVoisins(first_pos, other_pos) for first_pos in seg_coords1 for other_pos in seg_coords2])
+
+def placerBateau(bateau: dict, first_case: tuple, is_horizontal: bool) -> None:
+    if not type_bateau(bateau):
+        raise ValueError(f"placerBateau : L'argument {bateau} n'est pas un bateau")
+
+    if not type_coordonnees(first_case):
+        raise ValueError(f"placerBateau : L'argument {first_case} n'est pas une coordonnées valide")
+
+    if not peutPlacerBateau(bateau, first_case, is_horizontal):
+        raise RuntimeError(f"placerBateau : Impossible de placer le bateau à ces coordonnées, sortie de plateau")
+
+    ship_segments = getSegmentsBateau(bateau)
+    taille_bateau = getTailleBateau(bateau)
+    for x in range(taille_bateau):
+        segment = getSegmentBateau(bateau, x)
+        seg_pos = getCoordonneesSegment(segment)
+        if is_horizontal:
+            setCoordonneesSegment(segment, (first_case[0], first_case[1] + x))
+        else:
+            setCoordonneesSegment(segment, (first_case[0] + x, first_case[1]))
 
 def type_bateau(bateau: dict) -> bool:
     """
