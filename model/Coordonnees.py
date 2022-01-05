@@ -11,7 +11,6 @@
 
 from model.Constantes import *
 
-
 def sontVoisins(first_pos: tuple, other_pos: tuple) -> bool:
 
     if not type_coordonnees(first_pos) or first_pos is None:

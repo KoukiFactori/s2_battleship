@@ -5,7 +5,7 @@ from view import window
 from model.Constantes import *
 from model.Joueur import construireJoueur
 
-from model.Manuel import placerBateauxManuel
+from model.Manuel import placerBateauxManuel, choisirCaseTireManuel
 
 def main_test():
     j = construireJoueur("Teiuwu", [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.TORPILLEUR])
@@ -14,7 +14,7 @@ def main_test():
     placerBateauxManuel(j)
     window.set_action("Pour terminer, cliquez dans la grille de DROITE")
     window.get_clicked_cell(2)
-
+    choisirCaseTireManuel(j)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
