@@ -143,6 +143,15 @@ def reinitialiserBateau(ship: dict) -> None:
         
     return None
 
+def contientSegmentBateau(bateau: dict, coords: tuple) -> bool:
+    if not type_bateau(bateau):
+        raise ValueError(f"contientSegmentBateau : Le bateau {bateau} n'est pas valide")
+    if not type_coordonnees(coords) or coords is None:
+        raise ValueError(f"contientSegmentBateau : Les coordonées {coords} ne sont pas des coordonnées valides ou valent None")
+
+    segments_coords = [*map(getCoordonneesSegment, getSegmentsBateau(bateau))]
+    return coords in segments_coords
+
 def type_bateau(bateau: dict) -> bool:
     """
     Détermine si la liste représente un bateau
