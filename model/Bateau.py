@@ -121,11 +121,9 @@ def placerBateau(bateau: dict, first_case: tuple, is_horizontal: bool) -> None:
     if not peutPlacerBateau(bateau, first_case, is_horizontal):
         raise RuntimeError(f"placerBateau : Impossible de placer le bateau à ces coordonnées, sortie de plateau")
 
-    ship_segments = getSegmentsBateau(bateau)
     taille_bateau = getTailleBateau(bateau)
     for x in range(taille_bateau):
         segment = getSegmentBateau(bateau, x)
-        seg_pos = getCoordonneesSegment(segment)
         if is_horizontal:
             setCoordonneesSegment(segment, (first_case[0], first_case[1] + x))
         else:
