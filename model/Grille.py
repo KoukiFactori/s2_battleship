@@ -2,6 +2,7 @@
 
 from model.Constantes import *
 from model.Case import type_case
+from model.Coordonnees import type_coordonnees
 
 #
 # - Définition de la grille des tirs
@@ -22,7 +23,28 @@ def construireGrille() -> list:
     
     return grille
 
+def marquerCouleGrille(grille: list, coords: tuple) -> None:
+    if not type_grille(grille):
+        raise ValueError(f"marquerCouleGrille : La grille {grille} n'est pas une grille valide")
+    if not type_coordonnees(coords):
+        raise ValueError(f"marquerCouleGrille : Les coordonnées {coords} ne sont pas des coordonnées valides.")
 
+    lst = [coords]
+    while len(lst):
+        el = lst.pop()
+        grille[el[0]][el[1]] = const.COULE
+
+        ff = lambda c: c[0] >= 0 and c[0] < const.DIM and c[1] >= 0 and c[1] < const.DIM
+        possible_moves = filter(ff, [
+            (el[0] - 1, el[1]), (el[0] + 1, el[1]),
+            (el[0], el[1] - 1), (el[0], el[1] + 1)
+        ])
+
+        for move in possible_moves:
+            if grille[move[0]][move[1]] == const.TOUCHE:
+                lst.append(move)
+
+    
 def type_grille(g: list) -> bool:
     """
     Détermine si le paramètre est une grille de cases dont le type est passé en paramètre ou non

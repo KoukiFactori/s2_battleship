@@ -3,7 +3,7 @@
 from model.Coordonnees import type_coordonnees
 from model.Bateau import *
 
-from model.Grille import type_grille, construireGrille
+from model.Grille import type_grille, construireGrille, marquerCouleGrille
 from model.Constantes import *
 
 #
@@ -89,6 +89,28 @@ def reinitialiserBateauxJoueur(joueur: dict) -> None:
         reinitialiserBateau(ship)
 
     return None
+
+def repondreTirJoueur(joueur: dict, coords: tuple) -> object:
+    if not type_joueur(joueur):
+        raise ValueError(f"repondreTirJoueur : Le joueur {joueur} n'a pas une structure valide")
+    if not type_coordonnees(coords):
+        raise ValueError(f"repondreTirJoueur : Les coordonnées {coords} ne sont pas valides.")
+
+    response = const.RATE
+
+    ships = getBateauxJoueur(joueur)
+    for ship in ships:
+        is_seg_here = contientSegmentBateau(ship, coords)
+        if is_seg_here:
+            setEtatSegment(getSegmentBateau(ship, coords), const.TOUCHE)
+            if estCouleBateau(ship):
+                response = const.COULE
+                marquerCouleGrille(getGrilleTirsAdversaire(joueur), coords)
+            else:
+                response = const.TOUCHE
+                getGrilleTirsAdversaire(joueur)[coords[0]][coords[1]] = const.TOUCHE
+
+    return response
 
 def type_joueur(joueur: dict) -> bool:
     """
