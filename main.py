@@ -5,7 +5,7 @@ from view import window
 from model.Constantes import *
 from model.Joueur import construireJoueur, repondreTirJoueur
 
-from model.Manuel import placerBateauxManuel, choisirCaseTireManuel
+from model.Manuel import placerBateauxManuel, choisirCaseTireManuel, traiterResultatTirManuel
 
 def main_test():
     #j = construireJoueur("Teiuwu", [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.TORPILLEUR])
@@ -17,7 +17,7 @@ def main_test():
     while True:
         x = choisirCaseTireManuel(j)
         res = repondreTirJoueur(j, x)
-        print(res)
+        traiterResultatTirManuel(j, x, res)
         window.refresh()
     window.set_action("Pour terminer, cliquez dans la grille de DROITE") 
     window.get_clicked_cell(2)
