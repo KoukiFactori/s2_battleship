@@ -73,6 +73,7 @@ def setSegmentBateau(bateau: dict, n, segment: dict) -> None:
             raise ValueError(f"setSegmentBateau : Impossible d'accéder à ce segment, la valeur est en dehors des limites")
 
     bateau[const.BATEAU_SEGMENTS][n] = segment
+    return None
 
 def getCoordonneesBateau(bateau: dict) -> list:
     if not type_bateau(bateau):
@@ -129,6 +130,8 @@ def placerBateau(bateau: dict, first_case: tuple, is_horizontal: bool) -> None:
         else:
             setCoordonneesSegment(segment, (first_case[0] + x, first_case[1]))
 
+    return None
+    
 def reinitialiserBateau(ship: dict) -> None:
     if not type_bateau(ship):
         raise ValueError(f"reinitialiserBateau : Le bateau {ship} n'est pas valide")

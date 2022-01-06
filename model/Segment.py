@@ -42,6 +42,7 @@ def setCoordonneesSegment(segment: dict, coords: [int, int]) -> None:
         raise ValueError(f"setCoordonneesSegment : le paramètre {coords} n'est pas de type coordonnées")
 
     segment[const.SEGMENT_COORDONNEES] = coords
+    return None
 
 def setEtatSegment(segment: dict, etat: str) -> None:
     if not type_segment(segment):
@@ -51,6 +52,7 @@ def setEtatSegment(segment: dict, etat: str) -> None:
         raise ValueError(f"setEtatSegment : le paramètre {etat} n'est pas de type Etat")
 
     segment[const.SEGMENT_ETAT] = etat
+    return None
 
 def type_segment(objet: dict) -> bool:
 
