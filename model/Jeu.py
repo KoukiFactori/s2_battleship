@@ -3,7 +3,7 @@
 #
 #  Module mettant en place les joueurs
 #
-from model.Joueur import type_joueur, estPerdantJoueur, getNomJoueur
+from model.Joueur import type_joueur, estPerdantJoueur, getNomJoueur, repondreTirJoueur
 from model.Constantes import *
 from view import window
 from random import choice
@@ -28,23 +28,26 @@ def jouerJeu(player1: dict, player2: dict) -> None:
     placerBateauxManuel(player2)
 
     actual_player = choice([player1, player2])
-    switch_player = lambda: player2 if actual_player == player1 else player1
+    enemy = player1 if actual_player == player2 else player2
 
-    while (not estPerdantJoueur(player1)) or (not estPerdantJoueur(player2)):
+    while (not estPerdantJoueur(player1)) and (not estPerdantJoueur(player2)):
         window.afficher(actual_player)
         window.display_message(f"C'est au tour de {getNomJoueur(actual_player)}")
         
         x = choisirCaseTirManuel(actual_player)
-        res = repondreTirJoueur(actual_player, x)
+        res = repondreTirJoueur(enemy, x)
         traiterResultatTirManuel(actual_player, x, res)
         
         window.refresh()
         window.display_message(f"Tir en {x} : {res}")
         
-        switch_player()
+        actual_player, enemy = enemy, actual_player
+
+    window.display_message(f"Le gagnant est {getNomJoueur(enemy)}") #Car on a switch de joueur juste avant
     return None
 
-
+def getListeBateaux() -> None:
+    return [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.CROISEUR, const.TORPILLEUR]
 
 def type_acteur(agent: dict) -> bool:
     """
