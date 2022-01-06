@@ -18,32 +18,32 @@ from model.Manuel import *
 #       const.ACTEUR_CHOISIR_CASE : fonction permettant de choisir la case où le tir aura lieu
 #       const.ACTEUR_TRAITER_RESULTAT : fonction permettant de traiter le résultat d'un précédent tir
 
-def jouerJeu(player1: dict, player2: dict) -> None:
-    if not type_joueur(player1):
-        raise ValueError(f"jouerJeu : Le joueur {player1} n'est pas valide, essayez de jouer contre un arbre ?")
-    if not type_joueur(player2):
-        raise ValueError(f"jouerJeu : Le joueur {player2} n'est pas valide, essayez de trouver un ami pour jouer quand mê   me...")
+def jouerJeu(acteur1: dict, acteur2: dict) -> None:
+    if not type_acteur(acteur1):
+        raise ValueError(f"jouerJeu : L'acteur {acteur1} n'est pas valide ?")
+    if not type_acteur(acteur2):
+        raise ValueError(f"jouerJeu : L'acteur {acteur2} n'est pas valide, essayez de trouver un ami pour jouer quand même...")
 
-    placerBateauxManuel(player1)
-    placerBateauxManuel(player2)
+    acteur1[const.ACTEUR_PLACER_BATEAUX](acteur1[const.ACTEUR])
+    acteur2[const.ACTEUR_PLACER_BATEAUX](acteur1[const.ACTEUR])
 
-    actual_player = choice([player1, player2])
-    enemy = player1 if actual_player == player2 else player2
+    actual_player = choice([acteur1, acteur2])
+    enemy = acteur1 if actual_player == acteur2 else acteur2
 
-    while (not estPerdantJoueur(player1)) and (not estPerdantJoueur(player2)):
-        window.afficher(actual_player)
-        window.display_message(f"C'est au tour de {getNomJoueur(actual_player)}")
+    while (not estPerdantJoueur(acteur1[const.ACTEUR])) and (not estPerdantJoueur(acteur2[const.ACTEUR])):
+        window.afficher(actual_player[const.ACTEUR])
+        window.display_message(f"C'est au tour de {getNomJoueur(actual_player[const.ACTEUR])}")
         
-        x = choisirCaseTirManuel(actual_player)
-        res = repondreTirJoueur(enemy, x)
-        traiterResultatTirManuel(actual_player, x, res)
+        x = actual_player[const.ACTEUR_CHOISIR_CASE](actual_player[const.ACTEUR])
+        res = repondreTirJoueur(enemy[const.ACTEUR], x)
+        actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player[const.ACTEUR], x, res)
         
         window.refresh()
         window.display_message(f"Tir en {x} : {res}")
         
         actual_player, enemy = enemy, actual_player
 
-    window.display_message(f"Le gagnant est {getNomJoueur(enemy)}") #Car on a switch de joueur juste avant
+    window.display_message(f"Le gagnant est {getNomJoueur(enemy[const.ACTEUR])}") #Car on a switch de joueur juste avant
     return None
 
 def getListeBateaux() -> None:

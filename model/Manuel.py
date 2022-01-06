@@ -45,3 +45,16 @@ def traiterResultatTirManuel(joueur: dict, coords: tuple, res: str) -> None:
     marquerCouleGrille(grid, coords)
 
   return None
+
+
+
+def construireActeurManuel(joueur: dict) -> dict:
+  if not type_joueur(joueur):
+    raise ValueError(f"construireActeurManuel : Je sais bien qu'on essaye de faire un faux joueur, mais {joueur} n'est pas un joueur valide.")
+  
+  return {
+    const.ACTEUR: joueur,
+    const.ACTEUR_PLACER_BATEAUX: placerBateauxManuel,
+    const.ACTEUR_CHOISIR_CASE: choisirCaseTirManuel,
+    const.ACTEUR_TRAITER_RESULTAT: traiterResultatTirManuel
+  }

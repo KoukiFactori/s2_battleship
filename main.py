@@ -5,7 +5,7 @@ from view import window
 from model.Constantes import *
 from model.Joueur import construireJoueur, repondreTirJoueur
 from model.Jeu import getListeBateaux, jouerJeu
-from model.Manuel import placerBateauxManuel, choisirCaseTirManuel, traiterResultatTirManuel
+from model.Manuel import placerBateauxManuel, choisirCaseTirManuel, traiterResultatTirManuel, construireActeurManuel
 
 def main_test():
     #j = construireJoueur("Teiuwu", [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.TORPILLEUR])
@@ -23,8 +23,8 @@ def main_test():
     window.get_clicked_cell(2)
 
 def main():
-    j1 = construireJoueur("Teiuwu", getListeBateaux())
-    j2 = construireJoueur("Didiruwu", getListeBateaux())
+    j1 = construireActeurManuel(construireJoueur("Teiuwu", getListeBateaux()))
+    j2 = construireActeurManuel(construireJoueur("Didiruwu", getListeBateaux()))
     jouerJeu(j1, j2)
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
