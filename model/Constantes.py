@@ -67,4 +67,4 @@ const.JOUEUR_LISTE_BATEAUX = "Liste des bateaux"
 const.JOUEUR_GRILLE_TIRS = "Grille des tirs"
 const.JOUEUR_GRILLE_ADVERSAIRE = "Grille des tirs de l'adversaire"
 
-
+const.TARGETING_SPECIFIC_SHIP = "Bateau cible"

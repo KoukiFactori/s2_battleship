@@ -7,7 +7,9 @@ from model.Joueur import type_joueur, estPerdantJoueur, getNomJoueur, repondreTi
 from model.Constantes import *
 from view import window
 from random import choice
-from model.Manuel import *
+
+import pygame
+from time import sleep
 # Pour jouer, un joueur doit être capable de :
 # - placer ses bateaux
 # - choisir une case pour tirer
@@ -25,7 +27,7 @@ def jouerJeu(acteur1: dict, acteur2: dict) -> None:
         raise ValueError(f"jouerJeu : L'acteur {acteur2} n'est pas valide, essayez de trouver un ami pour jouer quand même...")
 
     acteur1[const.ACTEUR_PLACER_BATEAUX](acteur1[const.ACTEUR])
-    acteur2[const.ACTEUR_PLACER_BATEAUX](acteur1[const.ACTEUR])
+    acteur2[const.ACTEUR_PLACER_BATEAUX](acteur2[const.ACTEUR])
 
     actual_player = choice([acteur1, acteur2])
     enemy = acteur1 if actual_player == acteur2 else acteur2
@@ -34,13 +36,13 @@ def jouerJeu(acteur1: dict, acteur2: dict) -> None:
         window.afficher(actual_player[const.ACTEUR])
         window.display_message(f"C'est au tour de {getNomJoueur(actual_player[const.ACTEUR])}")
         
-        x = actual_player[const.ACTEUR_CHOISIR_CASE](actual_player[const.ACTEUR])
-        res = repondreTirJoueur(enemy[const.ACTEUR], x)
-        actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player[const.ACTEUR], x, res)
+        target = actual_player[const.ACTEUR_CHOISIR_CASE](actual_player[const.ACTEUR])
+        res = repondreTirJoueur(enemy[const.ACTEUR], target)
+        actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player[const.ACTEUR], target, res)
         
         window.refresh()
-        window.display_message(f"Tir en {x} : {res}")
-        
+        #pygame.time.wait(10)
+        window.display_message(f"Tir en {target} : {res}")
         actual_player, enemy = enemy, actual_player
 
     window.display_message(f"Le gagnant est {getNomJoueur(enemy[const.ACTEUR])}") #Car on a switch de joueur juste avant
