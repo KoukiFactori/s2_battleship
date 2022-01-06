@@ -20,7 +20,7 @@ def placerBateauxManuel(joueur: dict) -> None:
 
   return None
 
-def choisirCaseTireManuel(joueur: dict) -> tuple:
+def choisirCaseTirManuel(joueur: dict) -> tuple:
   if not type_joueur(joueur):
     raise ValueError(f"choisirCaseTirManuel : Le joueur {joueur} n'est pas un joueur valide")
 
