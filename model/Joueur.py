@@ -110,7 +110,15 @@ def repondreTirJoueur(joueur: dict, coords: tuple) -> object:
                 response = const.TOUCHE
                 getGrilleTirsAdversaire(joueur)[coords[0]][coords[1]] = const.TOUCHE
 
+    if response == const.RATE:
+        getGrilleTirsAdversaire(joueur)[coords[0]][coords[1]] = const.RATE
     return response
+
+def estPerdantJoueur(joueur: dict) -> bool:
+    if not type_joueur(joueur):
+        raise ValueError(f"EstPerdantJoueur : Le joueur {joueur} n'a pas une structure valide")
+    return all(map(estCouleBateau, getBateauxJoueur(joueur)))
+
 
 def type_joueur(joueur: dict) -> bool:
     """
