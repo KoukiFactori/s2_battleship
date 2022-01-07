@@ -41,7 +41,7 @@ def jouerJeu(acteur1: dict, acteur2: dict) -> None:
         actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player, target, res)
         
         window.refresh()
-        pygame.time.wait(1)
+        pygame.time.delay(5)
         #window.display_message(f"Tir en {target} : {res}")
         actual_player, enemy = enemy, actual_player
 

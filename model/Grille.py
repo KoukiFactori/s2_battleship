@@ -34,7 +34,7 @@ def marquerCouleGrille(grille: list, coords: tuple) -> None:
         el = lst.pop()
         grille[el[0]][el[1]] = const.COULE
 
-        ff = lambda c: c[0] >= 0 and c[0] < const.DIM and c[1] >= 0 and c[1] < const.DIM and grille[c[0]][c[1]] == const.TOUCHE
+        ff = lambda c: type_coordonnees(c) and grille[c[0]][c[1]] == const.TOUCHE
         possible_moves = filter(ff, [
             (el[0] - 1, el[1]), (el[0] + 1, el[1]),
             (el[0], el[1] - 1), (el[0], el[1] + 1)

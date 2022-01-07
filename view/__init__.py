@@ -5,7 +5,5 @@
 
 from view.BattleCanvas import BattleCanvas
 
-
-print(dir())
 if 'TESTS' not in dir():
     window = BattleCanvas()
