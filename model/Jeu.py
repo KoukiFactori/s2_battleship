@@ -3,7 +3,7 @@
 #
 #  Module mettant en place les joueurs
 #
-from model.Joueur import type_joueur, estPerdantJoueur, getNomJoueur, repondreTirJoueur
+from model.Joueur import estPerdantJoueur, getNomJoueur, repondreTirJoueur, type_joueur
 from model.Constantes import *
 from view import window
 from random import choice
@@ -34,15 +34,15 @@ def jouerJeu(acteur1: dict, acteur2: dict) -> None:
 
     while (not estPerdantJoueur(acteur1[const.ACTEUR])) and (not estPerdantJoueur(acteur2[const.ACTEUR])):
         window.afficher(actual_player[const.ACTEUR])
-        window.display_message(f"C'est au tour de {getNomJoueur(actual_player[const.ACTEUR])}")
+        #window.display_message(f"C'est au tour de {getNomJoueur(actual_player[const.ACTEUR])}")
         
-        target = actual_player[const.ACTEUR_CHOISIR_CASE](actual_player[const.ACTEUR])
+        target = actual_player[const.ACTEUR_CHOISIR_CASE](actual_player)
         res = repondreTirJoueur(enemy[const.ACTEUR], target)
-        actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player[const.ACTEUR], target, res)
+        actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player, target, res)
         
         window.refresh()
-        #pygame.time.wait(10)
-        window.display_message(f"Tir en {target} : {res}")
+        pygame.time.wait(1)
+        #window.display_message(f"Tir en {target} : {res}")
         actual_player, enemy = enemy, actual_player
 
     window.display_message(f"Le gagnant est {getNomJoueur(enemy[const.ACTEUR])}") #Car on a switch de joueur juste avant

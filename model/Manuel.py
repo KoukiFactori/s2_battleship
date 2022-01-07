@@ -8,6 +8,7 @@ from model.Grille import type_grille, marquerCouleGrille
 from model.Coordonnees import type_coordonnees
 from model.Etat import lst_resultat_tir
 
+from model.Jeu import type_acteur
 
 def placerBateauxManuel(joueur: dict) -> None:
 
@@ -20,26 +21,26 @@ def placerBateauxManuel(joueur: dict) -> None:
 
   return None
 
-def choisirCaseTirManuel(joueur: dict) -> tuple:
-  if not type_joueur(joueur):
-    raise ValueError(f"choisirCaseTirManuel : Le joueur {joueur} n'est pas un joueur valide")
+def choisirCaseTirManuel(acteur: dict) -> tuple:
+  if not type_acteur(acteur):
+    raise ValueError(f"choisirCaseTirManuel : L'acteur {acteur} n'est pas un acteur valide")
 
-  window.afficher(joueur)
+  window.afficher(acteur)
   #window.display_message(f"{getNomJoueur(joueur)} : Choisissez la case où vous voulez tirer")
   window.set_action("Choisissez la case de tir (bouton gauche)")
 
   res = window.get_clicked_cell(2)
   return res[0]
 
-def traiterResultatTirManuel(joueur: dict, coords: tuple, res: str) -> None:
-  if not type_joueur(joueur):
-    raise ValueError(f"traiterResultatTirManuel : Le joueur {joueur} n'est pas un joueur valide")
+def traiterResultatTirManuel(acteur: dict, coords: tuple, res: str) -> None:
+  if not type_acteur(acteur):
+    raise ValueError(f"traiterResultatTirManuel : L'acteur {acteur} n'est pas un acteur valide")
   if not type_coordonnees(coords) or coords is None:
     raise ValueError(f"traiterResultatTirManuel : Les coordonnées {coords} ne sont pas des coordonnées valides ou non nulles")
   if res not in lst_resultat_tir:
     raise ValueError(f"traiterResultatTriManuel : La réponse {res} reçue ne ressemble pas à un résultat de tir.")
 
-  grid = getGrilleTirsJoueur(joueur)
+  grid = getGrilleTirsJoueur(acteur)
   grid[coords[0]][coords[1]] = res
   if res == const.COULE:
     marquerCouleGrille(grid, coords)

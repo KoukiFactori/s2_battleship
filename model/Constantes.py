@@ -68,3 +68,12 @@ const.JOUEUR_GRILLE_TIRS = "Grille des tirs"
 const.JOUEUR_GRILLE_ADVERSAIRE = "Grille des tirs de l'adversaire"
 
 const.TARGETING_SPECIFIC_SHIP = "Bateau cible"
+
+
+#Constantes concernant l'IA
+
+const.TARGET_SESSION = "Destruction d'un bateau"
+
+const.SHIP_HIT_POSITIONS = "Positions des segments touchés"
+const.HIT_DIRECTION = "Direction du bateau"
+const.BASE_HIT_SUCCESSFUL = "Position tir référence réussi"
