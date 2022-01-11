@@ -10,6 +10,8 @@ from random import choice
 
 import pygame
 from time import sleep
+
+fps = 10
 # Pour jouer, un joueur doit être capable de :
 # - placer ses bateaux
 # - choisir une case pour tirer
@@ -41,7 +43,7 @@ def jouerJeu(acteur1: dict, acteur2: dict) -> None:
         actual_player[const.ACTEUR_TRAITER_RESULTAT](actual_player, target, res)
         
         window.refresh()
-        pygame.time.delay(5)
+        pygame.time.delay(int(1000/fps))
         #window.display_message(f"Tir en {target} : {res}")
         actual_player, enemy = enemy, actual_player
 
