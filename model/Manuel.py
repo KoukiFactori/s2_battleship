@@ -25,7 +25,7 @@ def choisirCaseTirManuel(acteur: dict) -> tuple:
   if not type_acteur(acteur):
     raise ValueError(f"choisirCaseTirManuel : L'acteur {acteur} n'est pas un acteur valide")
 
-  window.afficher(acteur)
+  window.afficher(acteur[const.ACTEUR])
   #window.display_message(f"{getNomJoueur(joueur)} : Choisissez la case où vous voulez tirer")
   window.set_action("Choisissez la case de tir (bouton gauche)")
 
@@ -40,7 +40,7 @@ def traiterResultatTirManuel(acteur: dict, coords: tuple, res: str) -> None:
   if res not in lst_resultat_tir:
     raise ValueError(f"traiterResultatTriManuel : La réponse {res} reçue ne ressemble pas à un résultat de tir.")
 
-  grid = getGrilleTirsJoueur(acteur)
+  grid = getGrilleTirsJoueur(acteur[const.ACTEUR])
   grid[coords[0]][coords[1]] = res
   if res == const.COULE:
     marquerCouleGrille(grid, coords)
